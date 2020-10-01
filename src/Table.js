@@ -5,7 +5,8 @@ const TableHeader = () => {
     <thead>
       <tr>
         <th>Todo</th>
-        <th>Remove</th>
+        <th>Completed</th>
+        <th colSpan="2">Actions</th>
       </tr>
     </thead>
   )
@@ -17,9 +18,11 @@ const TableBody = (props) => {
     return(
       <tr key={index}>
         <td>{row.todo}</td>
+        <td>{row.completed ? 'Yes' : 'No'}</td>
         <td>
           <button onClick={() => props.removeTodo(index)}>Delete</button>
         </td>
+        <td><input type="checkbox" onClick={() => props.completeTodo(index) }/>complete</td>
       </tr>
     )
   })
@@ -29,11 +32,11 @@ return <tbody>{rows}</tbody>
 
 class Table extends Component {
   render() {
-    const  {todoData, removeTodo} = this.props
+    const  {todoData, removeTodo, completeTodo} = this.props
     return(
       <table>
         <TableHeader/>
-        <TableBody todoData={todoData} removeTodo={removeTodo}/>
+        <TableBody todoData={todoData} removeTodo={removeTodo} completeTodo={completeTodo}/>
       </table>
     )
   }

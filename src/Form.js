@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 class Form extends Component {
   initialState = {
     todo: '',
+    completed: false
   }
 
   state = this.initialState
