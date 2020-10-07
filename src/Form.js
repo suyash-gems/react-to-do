@@ -1,42 +1,35 @@
-import React, {Component} from 'react'
+import React, {useState} from 'react';
 
-class Form extends Component {
-  initialState = {
-    todo: '',
-    completed: false
+const Form = (props) => {
+  const [todo, setTodo] = useState("");
+  const [completed, setCompleted] = useState(false);
+
+  const handleChange = (event) => {
+    setTodo(event.target.value)
   }
 
-  state = this.initialState
-
-  handleChange = (event) => {
-    const {name, value} = event.target
-
-    this.setState({
-      [name]: value,
-    })
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (todo.trim() === '') {
+      alert("Please enter something in the text box" );
+    } else {
+      props.handleSubmit({todo: todo, completed: completed });
+      setTodo('');
+      setCompleted(false);
+    }
   }
 
-  submitForm = () => {
-    this.props.handleSubmit(this.state)
-    this.setState(this.initialState)
-  }
-
-  render() {
-    const {todo} = this.state
-
-    return (
-      <form>
-        <label htmlFor="todo">Add Todo</label>
-        <input
-          type="text"
-          name="todo"
-          id="todo"
-          value={todo}
-          onChange={this.handleChange} />
-          <input type="button" value="Submit" onClick={this.submitForm} />
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={submitForm}>
+      <label htmlFor="todo">Add Todo</label>
+      <input
+        type="text"
+        name="todo"
+        id="todo"
+        value={todo}
+        onChange={handleChange} />
+    </form>
+  );
 }
 
 export default Form;

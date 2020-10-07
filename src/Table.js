@@ -22,7 +22,10 @@ const TableBody = (props) => {
         <td>
           <button onClick={() => props.removeTodo(index)}>Delete</button>
         </td>
-        <td><input type="checkbox" onClick={() => props.completeTodo(index) }/>complete</td>
+        <td><input type="checkbox"
+            checked={row.completed}
+            onChange={() => props.completeTodo(index) }/>
+            Complete</td>
       </tr>
     )
   })
